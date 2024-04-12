@@ -26,7 +26,7 @@ const Homepage = () => {
 
     const getTotal = async () => {
         try {
-            const { data } = await axios.get('http://localhost:4000/api/product/product-count')
+            const { data } = await axios.get('https://ecommercebackend-ztyj.onrender.com/api/product/product-count')
             setTotal(data?.total)
         }
         catch (error) {
@@ -47,7 +47,7 @@ const Homepage = () => {
     const getAllProducts = async () => {
         try {
             setLoading(true)
-            const { data } = await axios.get(`http://localhost:4000/api/product/product-list/${page}`)
+            const { data } = await axios.get(`https://ecommercebackend-ztyj.onrender.com/api/product/product-list/${page}`)
             setLoading(false)
             setProducts(data.products)
 
@@ -74,7 +74,7 @@ const Homepage = () => {
     const loadMore = async () => {
         try {
             setLoading(true)
-            const { data } = await axios.get(`http://localhost:4000/api/product/product-list/${page}`)
+            const { data } = await axios.get(`https://ecommercebackend-ztyj.onrender.com/api/product/product-list/${page}`)
             setLoading(false)
             setProducts([...products,...data.products])
 
@@ -92,7 +92,7 @@ const Homepage = () => {
 
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get('http://localhost:4000/api/category/get-category')
+            const { data } = await axios.get('https://ecommercebackend-ztyj.onrender.com/api/category/get-category')
             if (data?.success) {
                 setCategories(data?.allCategory)
             }
@@ -107,7 +107,7 @@ const Homepage = () => {
 
     const getFilteredProduct = async () => {
         try {
-            const { data } = await axios.post("http://localhost:4000/api/product/product-filter", { checked, radio })
+            const { data } = await axios.post("https://ecommercebackend-ztyj.onrender.com/api/product/product-filter", { checked, radio })
             setProducts(data?.filteredProduct)
 
         }

@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 const { Option } = Select
+import backendUrl from '../../src/config';
 
 const CreateProduct = () => {
 
@@ -24,7 +25,7 @@ const CreateProduct = () => {
 
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get('http://localhost:4000/api/category/get-category')
+            const { data } = await axios.get(`${backendUrl}/api/category/get-category`)
             if (data?.success) {
                 setCategories(data?.allCategory)
             }
@@ -55,7 +56,7 @@ const CreateProduct = () => {
                 productData.append('shipping', shipping)
                 productData.append('brand', brand)
 
-                const { data } = await axios.post('http://localhost:4000/api/product/create-product', productData)
+                const { data } = await axios.post(`${backendUrl}/api/product/create-product`, productData)
 
 
                

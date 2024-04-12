@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../Components/Layout/Layout';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import backendUrl from '../src/config';
 
 
 const CategoryProducts = () => {
@@ -14,7 +15,7 @@ const CategoryProducts = () => {
 
     const getProductsByCategory = async () => {
         try {
-            const { data } = await axios.get(`http://localhost:4000/api/product/product-category/${params.slug}`)
+            const { data } = await axios.get(`${backendUrl}/api/product/product-category/${params.slug}`)
             setProducts(data?.categoryProducts)
             setCategory(data?.category)
         }
@@ -41,7 +42,7 @@ const CategoryProducts = () => {
                             <div className="card m-3 h-90 " style={{ width: '12rem' }}>
                                  <Link to={`/productDetail/${p.slug}`} style={{textDecoration :'none'}}>
                                 <div className='card-inner'>
-                                <img src={`http://localhost:4000/api/product/product-image/${p._id}`}
+                                <img src={`${backendUrl}/api/product/product-image/${p._id}`}
                                     className="card-img-top "
                                     alt={p.name}
                                     height={'200px'} width={'200px'} />

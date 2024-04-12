@@ -7,6 +7,7 @@ import { Prices } from '../Components/Prices';
 import toast from 'react-hot-toast';
 import { useCart } from '../src/Context/CartProvider';
 import { useAuth } from '../src/Context/AuthProvider';
+import backendUrl from '../src/config';
 
 const Homepage = () => {
 
@@ -18,6 +19,7 @@ const Homepage = () => {
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
 
+
     const [cart, setCart] = useCart()
 
     const [auth, setAuth] = useAuth()
@@ -26,7 +28,7 @@ const Homepage = () => {
 
     const getTotal = async () => {
         try {
-            const { data } = await axios.get('https://ecommercebackend-ztyj.onrender.com/api/product/product-count')
+            const { data } = await axios.get(`${backendUrl}/api/product/product-count`)
             setTotal(data?.total)
         }
         catch (error) {
@@ -47,7 +49,7 @@ const Homepage = () => {
     const getAllProducts = async () => {
         try {
             setLoading(true)
-            const { data } = await axios.get(`https://ecommercebackend-ztyj.onrender.com/api/product/product-list/${page}`)
+            const { data } = await axios.get(`${backendUrl}/api/product/product-list/${page}`)
             setLoading(false)
             setProducts(data.products)
 
@@ -74,7 +76,7 @@ const Homepage = () => {
     const loadMore = async () => {
         try {
             setLoading(true)
-            const { data } = await axios.get(`https://ecommercebackend-ztyj.onrender.com/api/product/product-list/${page}`)
+            const { data } = await axios.get(`${backendUrl}/api/product/product-list/${page}`)
             setLoading(false)
             setProducts([...products,...data.products])
 
@@ -92,7 +94,7 @@ const Homepage = () => {
 
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get('https://ecommercebackend-ztyj.onrender.com/api/category/get-category')
+            const { data } = await axios.get(`${backendUrl}/api/category/get-category`)
             if (data?.success) {
                 setCategories(data?.allCategory)
             }
@@ -107,7 +109,7 @@ const Homepage = () => {
 
     const getFilteredProduct = async () => {
         try {
-            const { data } = await axios.post("https://ecommercebackend-ztyj.onrender.com/api/product/product-filter", { checked, radio })
+            const { data } = await axios.post(`${backendUrl}/api/product/product-filter`, { checked, radio })
             setProducts(data?.filteredProduct)
 
         }
@@ -188,7 +190,7 @@ const Homepage = () => {
                             <div className="card m-3 h-90 " style={{ width: '12rem' }}>
                                 <Link to={`/productDetail/${p.slug}`} style={{textDecoration :'none'}}>
                                 <div className="card-inner">
-                                    <img src={`http://localhost:4000/api/product/product-image/${p._id}`}
+                                    <img src={`${backendUrl}/api/product/product-image/${p._id}`}
                                         className="card-img "
                                         alt={p.name}
                                         height={'200px'} width={'200px'} />

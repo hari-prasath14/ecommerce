@@ -8,7 +8,7 @@ const useCategory = () => {
     const getCategory = async() =>{
         try 
         {
-            const {data} = await axios.get('http://localhost:4000/api/category/get-category')
+            const {data} = await axios.get(`${backendUrl}/api/category/get-category`)
             setCategories(data?.allCategory)
         } 
         catch (error) 

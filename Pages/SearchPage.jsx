@@ -2,6 +2,7 @@ import React from 'react';
 import { useSearch } from '../src/Context/SearchProvider';
 import Layout from '../Components/Layout/Layout';
 import { Link } from 'react-router-dom';
+import backendUrl from '../src/config';
 
 const SearchPage = () => {
     const [values, setValues] = useSearch()
@@ -20,7 +21,7 @@ const SearchPage = () => {
                             <Link to={`/productDetail/${p.slug}`} style={{ textDecoration: 'none' }}>
 
                                 <div className="card-inner">
-                                    <img src={`http://localhost:4000/api/product/product-image/${p._id}`}
+                                    <img src={`${backendUrl}/api/product/product-image/${p._id}`}
                                         className="card-img-top "
                                         alt={p.name}
                                         height={'200px'} width={'200px'} />

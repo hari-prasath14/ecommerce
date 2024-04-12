@@ -6,6 +6,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { Select } from 'antd';
 const {Option} = Select
+import backendUrl from '../../src/config';
 
 
 const AdminOrder = () => {
@@ -21,7 +22,7 @@ const AdminOrder = () => {
 
         const getOrders = async () => {
             try {
-                const res = await axios.get('http://localhost:4000/api/user/get-allorders')
+                const res = await axios.get(`${backendUrl}/api/user/get-allorders`)
                 setOrder(res.data.allOrders)
                 
             } 
@@ -40,7 +41,7 @@ const AdminOrder = () => {
 
         const handleChange = async(orderId,value) =>{
             try{
-                const {data} = await axios.put(`http://localhost:4000/api/user/update-orderstatus/${orderId}`,
+                const {data} = await axios.put(`${backendUrl}/api/user/update-orderstatus/${orderId}`,
                 {status:value}
                 )
                 getOrders()
@@ -102,7 +103,7 @@ const AdminOrder = () => {
                                         {o?.products?.map((p)=> (
                                             <div className='row mb-2 p-3 card flex-row' key={p._id}>
                                                 <div className='col md-4'>
-                                                <img src={`http://localhost:4000/api/product/product-image/${p._id}`}
+                                                <img src={`${backendUrl}/api/product/product-image/${p._id}`}
                                             className="card-img-top "
                                             alt={p.name}
                                             height={'200px'} widtd='200px' />

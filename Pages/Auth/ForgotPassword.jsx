@@ -3,6 +3,7 @@ import Layout from '../../Components/Layout/Layout';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import backendUrl from '../../src/config';
 
 const ForgotPassword = () => {
 
@@ -21,7 +22,7 @@ const ForgotPassword = () => {
 
     const handleSubmit =async()=>{
 
-        const res = await axios.post("http://localhost:4000/api/user/forgot-password",formValue)
+        const res = await axios.post(`${backendUrl}/api/user/forgot-password`,formValue)
 
         if(res.data.success)
         {

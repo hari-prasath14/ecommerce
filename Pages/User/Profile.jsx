@@ -4,6 +4,7 @@ import Layout from '../../Components/Layout/Layout';
 import { useAuth } from '../../src/Context/AuthProvider';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import backendUrl from '../../src/config';
 
 const Profile = () => {
 
@@ -22,7 +23,7 @@ const Profile = () => {
   async function handleSubmit(e) {
     // e.preventDefault()
     try {
-      const { data } = await axios.put("http://localhost:4000/api/user/update", {
+      const { data } = await axios.put(`${backendUrl}/api/user/update`, {
         firstName,
         lastName,
         emailID,

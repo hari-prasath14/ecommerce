@@ -10,7 +10,7 @@ const PaymentSuccess = () => {
       <div className="payment-success-content">
         <h2 className="payment-success-title">Payment Successful!</h2>
         <p className="payment-success-message">Thank you for your purchase.</p>
-        {/* Additional content or components can be added here */}
+        
       </div>
     </div>
     </Layout>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useCart } from '../src/Context/CartProvider';
 import toast from 'react-hot-toast';
 import { useAuth } from '../src/Context/AuthProvider';
+import backendUrl from '../src/config';
 
 const ProductDetailsPage = () => {
 
@@ -28,7 +29,7 @@ const ProductDetailsPage = () => {
                 }
             };
 
-            const res = await axios.get('http://localhost:4000/api/user/get-cart',config)
+            const res = await axios.get(`${backendUrl}/api/user/get-cart`,config)
                        
             const cartArray = res.data.cartArray;
         
@@ -66,7 +67,7 @@ const ProductDetailsPage = () => {
 
         const updatedCart = [...cart, product_id];
 
-        const res = await axios.put('http://localhost:4000/api/user/insert-cart',{
+        const res = await axios.put(`${backendUrl}/api/user/insert-cart`,{
             cart:updatedCart
         })
         console.log(res);
@@ -95,7 +96,7 @@ const ProductDetailsPage = () => {
     const getProduct = async() =>
     {
         try {
-            const {data} = await axios.get(`http://localhost:4000/api/product/get-product/${params.slug}`)
+            const {data} = await axios.get(`${backendUrl}/api/product/get-product/${params.slug}`)
             setProduct(data?.oneProduct)  
             getSimilarProduct(data?.oneProduct?._id,data?.oneProduct?.category?._id)
             
@@ -116,7 +117,7 @@ const ProductDetailsPage = () => {
     {
         try 
         {
-            const {data} =await axios.get(`http://localhost:4000/api/product/similar-product/${pid}/${cid}`)
+            const {data} =await axios.get(`${backendUrl}/api/product/similar-product/${pid}/${cid}`)
             setRelatedProducts(data.similarProducts)
 
         } 
@@ -132,7 +133,7 @@ const ProductDetailsPage = () => {
             
             <div className="row mt-4  product-detail-container" style={{justifyContent: 'space-around'}} >
                 <div className="col-sm-4" >
-                <img src={`http://localhost:4000/api/product/product-image/${product._id}`} 
+                <img src={`${backendUrl}/api/product/product-image/${product._id}`} 
                                     className="card-img-top product-image" 
                                     alt={product.name}
                                     height ={'300px'} width={'100px'} />
@@ -174,7 +175,7 @@ const ProductDetailsPage = () => {
                         {relatedProducts?.map((p) => (
                             <div className="card m-3 h-90 " style={{ width: '12rem' }}>
                                 <div className="card-inner">
-                                <img src={`http://localhost:4000/api/product/product-image/${p._id}`}
+                                <img src={`${backendUrl}/api/product/product-image/${p._id}`}
                                     className="card-img-top "
                                     alt={p.name}
                                     height={'200px'} width={'200px'} />

@@ -4,6 +4,7 @@ import UserMenu from '../../Components/Layout/UserMenu';
 import axios from 'axios';
 import moment from 'moment'
 import { useAuth } from '../../src/Context/AuthProvider';
+import backendUrl from '../../src/config';
 
 
 const Orders = () => {
@@ -14,14 +15,14 @@ const Orders = () => {
 
 
 const getOrders = async() =>{
-    const res = await axios.get('http://localhost:4000/api/user/get-orders')
+    const res = await axios.get(`${backendUrl}/api/user/get-orders`)
     setOrder(res.data.userOrder)
 }
 
 const getPaymentStatus = async() =>{
 
     try{
-        const res = await axios.get('http://localhost:4000/api/order/payment-status')
+        const res = await axios.get(`${backendUrl}/api/order/payment-status`)
         let payment_status =res.data.payment_status
         let paymentId = res.data.paymentId
 
@@ -29,7 +30,7 @@ const getPaymentStatus = async() =>{
         if(payment_status === "paid")
         {
 
-            const result = await axios.put('http://localhost:4000/api/order/update-payment-status',{
+            const result = await axios.put(`${backendUrl}/api/order/update-payment-status`,{
             payment_status,
             paymentId
 
@@ -90,7 +91,7 @@ useEffect(() => {
                                         {o?.products?.map((p)=> (
                                             <div className='row mb-2 p-3 card flex-row' key={p._id}>
                                                 <div className='col md-4'>
-                                                <img src={`http://localhost:4000/api/product/product-image/${p._id}`}
+                                                <img src={`${backendUrl}/api/product/product-image/${p._id}`}
                                             className="card-img-top "
                                             alt={p.name}
                                             height={'200px'} widtd='200px' />

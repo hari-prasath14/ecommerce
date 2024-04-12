@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useNavigate,useLocation } from 'react-router-dom';
 import { useAuth } from '../../src/Context/AuthProvider';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import backendUrl from '../../src/config';
 
 const Login = () => {
 
@@ -28,7 +29,7 @@ const Login = () => {
     async function handleSubmit(e){
         try{
             e.preventDefault()
-            const res = await axios.post("http://localhost:4000/api/user/login",formValue)
+            const res = await axios.post(`${backendUrl}/api/user/login`,formValue)
 
             if(res.data.success){
                 setAuth({...auth,

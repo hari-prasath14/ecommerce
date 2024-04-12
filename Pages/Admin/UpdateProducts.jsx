@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { Select } from 'antd';
 import { useNavigate,useParams } from 'react-router-dom';
 const { Option } = Select
+import backendUrl from '../../src/config';
 
 const UpdateProduct= () => {
 
@@ -29,7 +30,7 @@ const UpdateProduct= () => {
     const getSingleProduct = async() =>{
 
         try {
-            const {data} = await axios.get(`http://localhost:4000/api/product/get-product/${params.slug}`)
+            const {data} = await axios.get(`${backendUrl}/api/product/get-product/${params.slug}`)
             setId(data.oneProduct._id)
             setName(data.oneProduct.name)            
             setDescription(data.oneProduct.description)            
@@ -51,7 +52,7 @@ const UpdateProduct= () => {
     
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get('http://localhost:4000/api/category/get-category')
+            const { data } = await axios.get(`${backendUrl}/api/category/get-category`)
             if (data?.success) {
                 setCategories(data?.allCategory)
             }
@@ -78,7 +79,7 @@ const UpdateProduct= () => {
             productData.append('shipping', shipping)
             productData.append('brand', brand)
 
-            const {data} = await axios.put(`http://localhost:4000/api/product/update/${id}`,productData)
+            const {data} = await axios.put(`${backendUrl}/api/product/update/${id}`,productData)
 
             console.log(data);
 
@@ -109,7 +110,7 @@ const UpdateProduct= () => {
 
             if(!answer) return
             
-            const {data}=  await axios.delete(`http://localhost:4000/api/product/delete/${id}`)
+            const {data}=  await axios.delete(`${backendUrl}/api/product/delete/${id}`)
         if(data.success)
         {
             toast.success(data.message)
@@ -192,7 +193,7 @@ const UpdateProduct= () => {
                                 (
 
                                     <div className="text-center">
-                                    <img src={`http://localhost:4000/api/product/product-image/${id}`}
+                                    <img src={`${backendUrl}/api/product/product-image/${id}`}
                                     alt ="product_photo" height ={'200px'} 
                                     className='img img-response'></img>
                                 </div>

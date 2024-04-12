@@ -5,6 +5,7 @@ import { useAuth } from '../src/Context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
+import backendUrl from '../src/config';
 
 const CartPage = () => {
 
@@ -51,7 +52,7 @@ const CartPage = () => {
             console.log(index);
 
             setCart(cart => myCart)
-            const res = await axios.put('http://localhost:4000/api/user/insert-cart', {
+            const res = await axios.put(`${backendUrl}/api/user/insert-cart`, {
                 cart: myCart
             })
             console.log(res);
@@ -69,7 +70,7 @@ const CartPage = () => {
         try {
 
 
-            const res = await axios.post('http://localhost:4000/api/order/make-payment', {
+            const res = await axios.post(`${backendUrl}/api/order/make-payment`, {
                 auth,
                 cartItems,
                 // amount
@@ -93,13 +94,13 @@ const CartPage = () => {
                 }
             };
 
-            const res = await axios.get('http://localhost:4000/api/user/get-cart')
+            const res = await axios.get(`${backendUrl}/api/user/get-cart`)
             const cart = res.data.cartArray
 
             setCart(cart)
 
             const productPromises = cart.map(async (item) => {
-                const productRes = await axios.get(`http://localhost:4000/api/product/get-productbyid/${item}`, config);
+                const productRes = await axios.get(`${backendUrl}/api/product/get-productbyid/${item}`, config);
                 return productRes.data.oneProduct;
             });
 
@@ -154,7 +155,7 @@ const CartPage = () => {
                                     cartItems?.map((p) => (
                                         <div className="row mb-2 card flex-row">
                                             <div className="cart-item-image">
-                                                <img src={`http://localhost:4000/api/product/product-image/${p._id}`}
+                                                <img src={`${backendUrl}/api/product/product-image/${p._id}`}
                                                     className="card-img-top "
                                                     alt={p.name}
                                                     height={'200px'} width='200px' />

@@ -4,6 +4,7 @@ import Layout from '../../Components/Layout/Layout';
 // import { toast } from 'react-toastify';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import backendUrl from '../../src/config';
 
 
 
@@ -29,7 +30,7 @@ const Resgister = () => {
     try {
       if (password.length > 8) {
         setErrorMessage('')
-        const res = await axios.post("http://localhost:4000/api/user/register", {
+        const res = await axios.post(`${backendUrl}/api/user/register`, {
           firstName,
           lastName,
           emailID,

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import backendUrl from '../config.js'
 
 const useCategory = () => {
 
@@ -13,7 +14,7 @@ const useCategory = () => {
         } 
         catch (error) 
         {
-            console.log(error);
+            console.log("error",error);
         }
     }
 
